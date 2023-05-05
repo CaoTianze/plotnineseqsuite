@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>plotnineSeqSuite Documentation</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Getting Started";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> plotnineSeqSuite Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Getting Started</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#load-sample-data">Load sample data</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#visualizing-aligned-sequences">Visualizing aligned sequences</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#plot-an-aligned-sequences">Plot an aligned sequences</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#accepted-input-formats">Accepted input formats</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#no-background-color">No background color</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#no-sequence-letter">No sequence letter</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tagging-sequences">Tagging sequences</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#visualizing-sequence-logo">Visualizing sequence logo</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#plot-a-sequence-logo">Plot a sequence logo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#accepted-input-formats_1">Accepted input formats</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#plotting-methods">Plotting methods</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#custom-height-logos">Custom-height logos</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#visualizing-sequence-histogram">Visualizing sequence histogram</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#plot-a-sequence-histogram">Plot a sequence histogram</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#accepted-input-formats_2">Accepted input formats</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#no-sequence-letter_1">No sequence letter</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sequence-types">Sequence types</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#preset-alphabets">Preset alphabets</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#custom-alphabet">Custom alphabet</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#colour-schemes">Colour schemes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#preset-color-schemes">Preset color schemes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#custom-color-schemes">Custom color schemes</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#discrete-color-schemes">Discrete color schemes</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#continuous-color-schemes">Continuous color schemes</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#multiple-grouped-sequences">Multiple grouped sequences</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fonts">Fonts</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-plotnineseqsuite">Advanced plotnineSeqSuite</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#combining-plots">Combining plots</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#modify-the-starting-position">Modify the starting position</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#used-concurrently-with-other-functions-of-plotnine">Used concurrently with other functions of plotnine.</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="col_schemes/">color schemes</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="font/">font</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="geom_alignedSeq/">geom_alignedSeq</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="geom_logo/">geom_logo</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="geom_seqBar/">geom_seqBar</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="theme/">theme</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">plotnineSeqSuite Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Getting Started</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="getting-started">Getting Started</h1>
+<h2 id="installation">Installation</h2>
+<p><code>pip install plotnineseqsuite</code></p>
+<h2 id="load-sample-data">Load sample data</h2>
+<pre><code class="language-python">from plotnineseqsuite.data import seqs_dna, seqs_aa ,pfms_dna
+</code></pre>
+<p>This loads three sample data sets:</p>
+<ul>
+<li><code>seqs_dna</code>: dict of binding sites for 12 transcription factors obtained from FASTA files in <a href="http://jaspar.genereg.net/">JASPAR</a>. The keys represent the JASPAR ID.</li>
+<li><code>pfms_dna</code>: dict of position frequency matrices for four transcription factors obtained from <a href="http://jaspar.genereg.net/">JASPAR</a>. The keys names represent the JASPAR ID.</li>
+<li><code>seqs_aa</code>: dict of kinase-substrate phosphorylation sites obtained from <a href="https://www.ncbi.nlm.nih.gov/pubmed/25938373">Wagih et al.</a> The keys represent the names of the kinases associated with the phosphosites.</li>
+</ul>
+<h2 id="visualizing-aligned-sequences">Visualizing aligned sequences</h2>
+<h3 id="plot-an-aligned-sequences">Plot an aligned sequences</h3>
+<p>You can draw an aligned sequences using ggplot function, with geom_alignedSeq. Let’s try this on sequences for one of the transcription factors from JASPAR:</p>
+<pre><code class="language-python">from plotnine import ggplot, coord_fixed
+from plotnineseqsuite.align import geom_alignedSeq
+from plotnineseqsuite.theme import theme_seq
+ggplot() + geom_alignedSeq(seqs_dna['MA0013.1']) + theme_seq() + coord_fixed()
+</code></pre>
+<p><img alt="" src="plot_an_aligned_sequences.png" /></p>
+<h3 id="accepted-input-formats">Accepted input formats</h3>
+<p>geom_alignedSeq accepts two types of input, each described in detail below</p>
+<ol>
+<li>list: a list of aligned sequences</li>
+<li>dict: It is used for plotting more than one sequence logo at the same time with the help of facets, the key of dict is facet value, and the value of dict is list described above</li>
+</ol>
+<h3 id="no-background-color">No background color</h3>
+<p>When bg_col_scheme option is None, the picture has no background color. </p>
+<pre><code class="language-python">ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font_col='black', bg_col_scheme=None) + theme_seq() + coord_fixed()
+</code></pre>
+<p><img alt="" src="no_background_color.png" /></p>
+<h3 id="no-sequence-letter">No sequence letter</h3>
+<p>When font option is None, the picture has only the background color. </p>
+<pre><code class="language-python">ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font=None) + theme_seq() + coord_fixed()
+</code></pre>
+<p><img alt="" src="no_sequence_letter.png" /></p>
+<h3 id="tagging-sequences">Tagging sequences</h3>
+<p>You can set seq_names parameter to identify the name of the sequence.</p>
+<pre><code class="language-python">names=['seq-a', 'seq-b', 'seq-c', 'seq-d', 'seq-e', 'seq-f']
+ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], seq_names=names) + theme_seq() + coord_fixed()
+</code></pre>
+<p><img alt="" src="tagging_sequences.png" /></p>
+<h2 id="visualizing-sequence-logo">Visualizing sequence logo</h2>
+<h3 id="plot-a-sequence-logo">Plot a sequence logo</h3>
+<p>You can draw a sequence logos using ggplot function, with geom_logo. Let’s try this on sequences for one of the transcription factors from JASPAR:</p>
+<pre><code class="language-python">from plotnine import ggplot
+from plotnineseqsuite.logo import geom_logo
+from plotnineseqsuite.theme import theme_seq
+ggplot() + geom_logo(seqs_dna['MA0001.1']) + theme_seq()
+</code></pre>
+<p><img alt="" src="plot_a_sequence_logo.png" /></p>
+<h3 id="accepted-input-formats_1">Accepted input formats</h3>
+<p>geom_logo accepts three types of input, each described in detail below</p>
+<ol>
+<li>list: a list of aligned sequences</li>
+<li>numpy.ndarray: a position frequency matrix, where the row is the letter, and column is the position. Note: The order of the rows corresponds to the NAMESPACE one by one.</li>
+<li>dict: It is used for plotting more than one sequence logo at the same time with the help of facets, the key of dict is facet value, and the value of dict is list or numpy.ndarray described above</li>
+</ol>
+<p>The following generates a sequence logo using a position frequency matrix from the sample data</p>
+<pre><code class="language-python">ggplot() + geom_logo(pfms_dna['MA0018.2'],seq_type='DNA') + theme_seq()
+</code></pre>
+<p><img alt="" src="accepted_input_formats.png" /></p>
+<h3 id="plotting-methods">Plotting methods</h3>
+<p>geom_logo supports two sequence logo methods through the method options: ‘bits’ and ‘probability’. By default, the bits is used.</p>
+<pre><code class="language-python">ggplot() + geom_logo( seqs_dna['MA0001.1'], method = 'bits' ) + theme_seq()
+ggplot() + geom_logo( seqs_dna['MA0001.1'], method = 'probability' ) + theme_seq()
+</code></pre>
+<p><img alt="" src="plotting_methods_1.png" />
+<img alt="" src="plotting_methods_2.png" /></p>
+<h3 id="custom-height-logos">Custom-height logos</h3>
+<p>If you have your own height metric for each letter, simply create a matrix where each cell is a the desired height, and set the method to custom. You can even have negative heights. Here’s a simple example:</p>
+<pre><code class="language-python">import numpy as np
+custom_mat = np.random.randn(4,5)
+ggplot() + geom_logo(custom_mat, method='custom', seq_type='DNA') + theme_seq()
+</code></pre>
+<p><img alt="" src="custom_height_logos.png" /></p>
+<h2 id="visualizing-sequence-histogram">Visualizing sequence histogram</h2>
+<h3 id="plot-a-sequence-histogram">Plot a sequence histogram</h3>
+<p>You can draw a conservation bar of aligned sequences using ggplot function, with geom_seqBar. Let’s try this on sequences for one of the transcription factors from JASPAR:</p>
+<pre><code class="language-python">from plotnineseqsuite.bar import geom_seqBar
+ggplot() + geom_seqBar(seqs_dna['MA0013.1']) + theme_seq()
+</code></pre>
+<p><img alt="" src="plot_a_sequence_bar.png" /></p>
+<h3 id="accepted-input-formats_2">Accepted input formats</h3>
+<p>geom_seqBar accepts three types of input, each described in detail below</p>
+<ol>
+<li>list: a list of aligned sequences</li>
+<li>numpy.ndarray: a position frequency matrix, where the row is the letter, and column is the position. Note: The order of the rows corresponds to the NAMESPACE one by one.</li>
+<li>dict: It is used for plotting more than one sequence histogram at the same time with the help of facets, the key of dict is facet value, and the value of dict is list or numpy.ndarray described above</li>
+</ol>
+<p>The following generates a sequence histogram using a position frequency matrix from the sample data</p>
+<pre><code class="language-python">ggplot() + geom_seqBar(pfms_dna['MA0018.2'],seq_type='DNA') + theme_seq()
+</code></pre>
+<p><img alt="" src="bar_accepted_input_formats.png" /></p>
+<h3 id="no-sequence-letter_1">No sequence letter</h3>
+<p>When font option is None, the picture has only the bar.</p>
+<pre><code class="language-python">ggplot() + geom_seqBar(seqs_dna['MA0013.1'], font=None) + theme_seq()
+</code></pre>
+<p><img alt="" src="bar_no_sequence_letter.png" /></p>
+<h2 id="sequence-types">Sequence types</h2>
+<h3 id="preset-alphabets">Preset alphabets</h3>
+<p>Amino acids, DNA and RNA sequence types are all supported by geom_logo, geom_seqBar and geom_alignedSeq. By default, plotnineSeqSuite will try to guess your sequence type. You can explicitly set the sequence type through the seq_type option.</p>
+<p>Lets try generate an amino acid sequence logo using kinase-substrate phosphorylation data:</p>
+<pre><code class="language-python">ggplot() + geom_logo( seqs_aa['AKT1'], seq_type = 'AA' ) + theme_seq()
+</code></pre>
+<p><img alt="" src="preset_alphabets.png" /></p>
+<h3 id="custom-alphabet">Custom alphabet</h3>
+<p>If you want to define a custom alphabet you can do so by setting namespace with your desired custom alphabet. For example, lets say you wanted a sequence logo of zeros and ones:</p>
+<pre><code class="language-python">from plotnine.guides import guides
+seqs_numeric = list(map(lambda x: x.replace('A','1').replace('T','2').replace('G','3').replace('C','4'), seqs_dna['MA0001.1']))
+ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['1','2','3','4']) + theme_seq()+guides(fill=False)
+</code></pre>
+<p><img alt="" src="custom_alphabet.png" /> <br />
+Greek letters are also supported:</p>
+<pre><code class="language-python">seqs_numeric = list(map(lambda x: x.replace('A','δ').replace('T','ε').replace('G','ψ').replace('C','λ'), seqs_dna['MA0001.1']))
+ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['δ','ε','ψ','λ']) + theme_seq()+guides(fill=False)
+</code></pre>
+<p><img alt="" src="custom_alphabet_2.png" /></p>
+<h2 id="colour-schemes">Colour schemes</h2>
+<h3 id="preset-color-schemes">Preset color schemes</h3>
+<p>plotnineSeqSuite has preset color schemes that can be set using the col_scheme parameter in geom_logo, the parameter bar_col_scheme in geom_seqBar and the parameter bg_col_scheme in geom_alignedSeq. By default, the col_scheme is set to AUTO such that the color scheme is automatically chosen based on your sequence type.</p>
+<p>Lets try generate an amino acid sequence logo using kinase-substrate phosphorylation data:</p>
+<pre><code class="language-python">ggplot() + geom_logo(seqs_dna['MA0001.1'], col_scheme='base_pairing') + theme_seq()
+</code></pre>
+<p><img alt="" src="preset_color_schemes.png" /></p>
+<h3 id="custom-color-schemes">Custom color schemes</h3>
+<p>If the presets are not enough for you, you can define custom discrete or continuous color schemes using the col_schemes.make_col_scheme function. Here are two examples of discrete and continuous color schemes.</p>
+<h4 id="discrete-color-schemes">Discrete color schemes</h4>
+<pre><code class="language-python">from plotnineseqsuite.col_schemes import make_col_scheme
+cs1 = make_col_scheme(chars=['A', 'T', 'C', 'G'], groups=['gr1', 'gr1', 'gr2', 'gr2'],cols=['purple', 'purple', 'blue', 'blue'])
+ggplot() + geom_logo(seqs_dna['MA0001.1'], col_scheme=cs1) + theme_seq()
+</code></pre>
+<p><img alt="" src="custom_color_schemes1.png" /></p>
+<h4 id="continuous-color-schemes">Continuous color schemes</h4>
+<pre><code class="language-python">cs2 = make_col_scheme(chars=['A', 'T', 'C', 'G'], values=[1,2,3,4])
+ggplot() + geom_logo(seqs_dna['MA0001.1'], col_scheme=cs2) + theme_seq()
+</code></pre>
+<p><img alt="" src="custom_color_schemes2.png" /></p>
+<h2 id="multiple-grouped-sequences">Multiple grouped sequences</h2>
+<p>You can plot more than one grouped sequences at the same time with the help of facets. plotnineSeqSuite will accept a dict. The keys of the dict will be used as the facet titles. Take geom_logo for example.</p>
+<pre><code class="language-python">from plotnine import facet_wrap
+ggplot() + geom_logo(seqs_dna)+ theme_seq()+facet_wrap('~seq_group', ncol=4, scales='free_x')
+</code></pre>
+<p><img alt="" src="multiple_grouped_sequences.png" /></p>
+<h2 id="fonts">Fonts</h2>
+<p>You can adjust the font of letters by setting the font parameter. To list all the available color schemes use the font.list_fonts function. Take geom_logo for example.</p>
+<pre><code class="language-python">from plotnine import ggtitle
+import patchworklib as pw
+from plotnineseqsuite.font import list_fonts
+
+fonts = list_fonts()
+for i in range(0,12,3):
+    g1 = pw.load_ggplot(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i]) + theme_seq()+ggtitle(fonts[i]))
+    g2 = pw.load_ggplot(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i+1]) + theme_seq() + ggtitle(fonts[i+1]))
+    g3 = pw.load_ggplot(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i+2]) + theme_seq() + ggtitle(fonts[i+2]))
+    if i == 0:
+        allgg = g1|g2|g3
+    else:
+        temp = g1|g2|g3
+        allgg = temp/allgg
+allgg.savefig()
+</code></pre>
+<p><img alt="" src="fonts.png" /></p>
+<h2 id="advanced-plotnineseqsuite">Advanced plotnineSeqSuite</h2>
+<p>plotnineSeqSuite is based on object-oriented design. The *_data property of class geom_logo and geom_seqBar, geom_alignedSeq is a core feature.</p>
+<h3 id="combining-plots">Combining plots</h3>
+<p>Without using any packages like patchwork and cowplot, plotnineSeqSuite can easily plot geom_logo and geom_seqBar, geom_alignedSeq in one figure. I’ll demonstrate with an example plotting probability sequence logo, aligned sequences and sequence histogram in one figure via changed *_data property.</p>
+<pre><code class="language-python">from plotnine import scale_y_continuous
+names = ['seq-a', 'seq-b', 'seq-c', 'seq-d', 'seq-e', 'seq-f']
+seqs = geom_alignedSeq(seqs_dna['MA0013.1'], seq_names=names)
+logo = geom_logo(seqs_dna['MA0013.1'], method='probability')
+logo.data['y'] = logo.data['y']+6.1
+bar = geom_seqBar(seqs_dna['MA0013.1'], font=None)
+bar.bar_data['y'] = bar.bar_data['y'] - 6.1
+ggplot() + logo + bar + seqs + theme_seq() + scale_y_continuous(breaks=lambda x: [k + 0.5 for k in range(0, len(names))], labels=names)
+</code></pre>
+<p><img alt="" src="combining_plots.png" /></p>
+<h3 id="modify-the-starting-position">Modify the starting position</h3>
+<p>When the input sequence fragment does not start at 1, you can modify the x value of the property to display the correct starting position.</p>
+<pre><code class="language-python">names = ['seq-a', 'seq-b', 'seq-c', 'seq-d', 'seq-e', 'seq-f']
+seqs = geom_alignedSeq(seqs_dna['MA0013.1'], seq_names=names)
+seqs.bg_data['x'] = seqs.bg_data['x']+3333
+seqs.letter_data['x'] = seqs.letter_data['x']+3333
+ggplot() + seqs + theme_seq()
+</code></pre>
+<p><img alt="" src="modify_the_starting_position.png" /></p>
+<h3 id="used-concurrently-with-other-functions-of-plotnine">Used concurrently with other functions of plotnine.</h3>
+<p>Because plotnineSeqSuite is an extension of plotnine, functions of plotnine can be used without obstacles. Here is an example of drawing rectangles, lines and text.</p>
+<pre><code class="language-python">from plotnine.geoms import annotate
+ggplot() + geom_alignedSeq(seqs_dna['MA0013.1']) + annotate('rect', xmin=0.5, xmax=3.5, ymin=-0.05, ymax=6.1,alpha=.1, color='black') + theme_seq()
+</code></pre>
+<p><img alt="" src="test_annotate1.png" /></p>
+<pre><code class="language-python">ggplot() + geom_seqBar(seqs_dna['MA0013.1']) + annotate('segment', x=1.5, xend=2.5, y=0, yend=0, size=2, color='red') + annotate('segment', x=4.5, xend=7.5, y=0, yend=0, size=2, color='red') + annotate('segment', x=8.5, xend=11.5, y=0, yend=0,size=2, color='red') + annotate('text', x=6, y=-0.2,label='A is the most', color='red') + theme_seq()
+</code></pre>
+<p><img alt="" src="test_annotate2.png" /></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="col_schemes/" class="btn btn-neutral float-right" title="color schemes">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="col_schemes/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.4.2
+Build Date UTC : 2023-04-13 08:15:10.245367+00:00
+-->
