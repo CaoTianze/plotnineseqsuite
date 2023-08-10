@@ -6,13 +6,12 @@ from numpy import ndarray, array, zeros, sum, apply_along_axis, log2
 from pandas import merge, DataFrame, concat
 from pandas.core.dtypes.common import is_numeric_dtype
 from plotnine import aes, geom_polygon, scale_x_continuous
-from plotnine.scales import scale_fill_gradient, scale_fill_manual
-from plotnine.guides import guides
 from plotnine.labels import xlab, ylab
+from plotnine.scales import scale_fill_gradient, scale_fill_manual
 
 from plotnineseqsuite.col_schemes import get_col_scheme
-from plotnineseqsuite.font import get_font
 from plotnineseqsuite.common import find_namespace, new_range, letter_matrix
+from plotnineseqsuite.font import get_font
 
 
 class geom_logo:
@@ -22,6 +21,7 @@ class geom_logo:
                  col_scheme: Union[DataFrame, str] = 'AUTO',
                  low_col: str = 'black', high_col: str = 'yellow', na_col: str = '#333333',
                  **kwargs):
+        self.__kwargs = kwargs
         if stack_width > 1 or stack_width <= 0:
             raise Exception('"stack_width" must be between 0 and 1')
         if data is None:
@@ -66,7 +66,6 @@ class geom_logo:
 
         data['group_by'] = data.apply(lambda x: '{}.{}.{}'.format(x['seq_group'], x['letter'], x['position']), axis=1)
         self.data = data
-        self.layer = geom_polygon(data=data, mapping=aes(x='x', y='y', fill='group', group='group_by'), **kwargs)
         self.scale_x_continuous = scale_x_continuous(breaks=lambda x: range(floor(x[0]), ceil(x[1])), expand=(0,0))
         self.ylab = ylab(y_lab)
         self.xlab = xlab('')
@@ -103,7 +102,9 @@ class geom_logo:
                 'logo_data': ff}
 
     def __radd__(self, gg):
-        gg = gg + [self.layer, self.scale_x_continuous, self.ylab, self.xlab, self.colscale_opts]
+        gg = gg + [
+            geom_polygon(data=self.data, mapping=aes(x='x', y='y', fill='group', group='group_by'), **self.__kwargs),
+            self.scale_x_continuous, self.ylab, self.xlab, self.colscale_opts]
         return gg
 
 

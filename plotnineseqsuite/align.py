@@ -5,11 +5,11 @@ from typing import List, Dict, Union
 from pandas import merge, DataFrame, concat
 from pandas.core.dtypes.common import is_numeric_dtype
 from plotnine import scale_fill_gradient, scale_fill_manual, aes, geom_tile, \
-    scale_x_continuous, geom_polygon, xlab, ylab, guides, scale_y_continuous
+    scale_x_continuous, geom_polygon, xlab, ylab, scale_y_continuous
 
 from plotnineseqsuite.col_schemes import get_col_scheme
-from plotnineseqsuite.font import get_font
 from plotnineseqsuite.common import find_namespace, letter_matrix, new_range
+from plotnineseqsuite.font import get_font
 
 
 class geom_alignedSeq:
@@ -20,6 +20,8 @@ class geom_alignedSeq:
                  font_col: str = '#000000', bg_col_scheme: Union[DataFrame, str] = 'AUTO',
                  bg_low_col: str = 'black', bg_high_col: str = 'yellow', bg_na_col: str = '#333333',
                  **kwargs):
+        self.__kwargs = kwargs
+        self.__font_col = font_col
         if stack_width > 1 or stack_width <= 0:
             raise Exception('"stack_width" must be between 0 and 1')
         if data is None:
@@ -61,12 +63,9 @@ class geom_alignedSeq:
                 colscale_opts = scale_fill_manual(values=col_map, name=legend_title, na_value=bg_na_col)
             bg_data = merge(bg_data, bg_cs_dict['cs'], how='left')
             self.bg_data = bg_data
-            self.bg_layer = geom_tile(data=bg_data,
-                                      mapping=aes(x='x', y='y', width='width', height='height', fill='group'), **kwargs)
             self.colscale_opts = colscale_opts
         else:
             self.bg_data = None
-            self.bg_layer = None
             self.colscale_opts = None
 
         if font is not None:
@@ -74,11 +73,8 @@ class geom_alignedSeq:
             letter_data['group_by'] = letter_data.apply(
                 lambda x: '{}.{}.{}.{}'.format(x['seq_group'], x['letter'], x['position'], x['y_index']), axis=1)
             self.letter_data = letter_data
-            self.letter_layer = geom_polygon(data=letter_data, mapping=aes(x='x', y='y', group='group_by'),
-                                             fill=font_col, **kwargs)
         else:
             self.letter_data = None
-            self.letter_layer = None
         self.scale_x_continuous = scale_x_continuous(breaks=lambda x: range(floor(x[0]), ceil(x[1])), expand=(0,0))
         self.scale_y_continuous = scale_y_continuous(breaks=None)
         if seq_names is not None:
@@ -131,7 +127,16 @@ class geom_alignedSeq:
         return {'seq_type': seq_type, 'positioned_letter_arr': positioned_letter_arr}
 
     def __radd__(self, gg):
-        gg = gg + [self.bg_layer, self.letter_layer, self.scale_x_continuous, self.scale_y_continuous, self.ylab,
-                   self.xlab,
-                   self.colscale_opts]
+        params = []
+        if self.bg_data is not None:
+            bg_layer = geom_tile(data=self.bg_data,
+                                 mapping=aes(x='x', y='y', width='width', height='height', fill='group'),
+                                 **self.__kwargs)
+            params.append(bg_layer)
+        if self.letter_data is not None:
+            letter_layer = geom_polygon(data=self.letter_data, mapping=aes(x='x', y='y', group='group_by'),
+                                        fill=self.__font_col, **self.__kwargs)
+            params.append(letter_layer)
+        params.extend([self.scale_x_continuous, self.scale_y_continuous, self.ylab, self.xlab, self.colscale_opts])
+        gg = gg + params
         return gg

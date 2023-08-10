@@ -6,11 +6,11 @@ from numpy import ndarray, array, zeros, apply_along_axis
 from pandas import merge, DataFrame, concat
 from pandas.core.dtypes.common import is_numeric_dtype
 from plotnine import scale_fill_gradient, scale_fill_manual, aes, geom_tile, \
-    scale_x_continuous, scale_y_continuous, geom_polygon, xlab, ylab, guides
+    scale_x_continuous, scale_y_continuous, geom_polygon, xlab, ylab
 
 from plotnineseqsuite.col_schemes import get_col_scheme
-from plotnineseqsuite.font import get_font
 from plotnineseqsuite.common import find_namespace, letter_matrix, new_range
+from plotnineseqsuite.font import get_font
 
 
 class geom_seqBar:
@@ -20,6 +20,8 @@ class geom_seqBar:
                  font_col: str = '#808080',
                  low_col: str = 'black', high_col: str = 'yellow', na_col: str = '#333333',
                  **kwargs):
+        self.__font_col = font_col
+        self.__kwargs = kwargs
         if stack_width > 1 or stack_width <= 0:
             raise Exception('"stack_width" must be between 0 and 1')
         if data is None:
@@ -50,8 +52,6 @@ class geom_seqBar:
             letter_data['group_by'] = letter_data.apply(
                 lambda x: '{}.{}.{}'.format(x['seq_group'], x['letter'], x['position']), axis=1)
             self.letter_data = letter_data
-            self.letter_layer = geom_polygon(data=letter_data, mapping=aes(x='x', y='y', group='group_by'),
-                                             fill=font_col, **kwargs)
         colscale_gradient = True if is_numeric_dtype(bar_cs_dict['cs']['group']) else False
         if colscale_gradient:
             colscale_opts = scale_fill_gradient(low=low_col, high=high_col, name=legend_title, na_value=na_col)
@@ -62,11 +62,8 @@ class geom_seqBar:
                 col_map.update(item)
             colscale_opts = scale_fill_manual(values=col_map, name=legend_title, na_value=na_col)
         self.bar_data = bar_data
-        self.bar_layer = geom_tile(data=bar_data,
-                                   mapping=aes(x='x', y='y', width='width', height='height', fill='group'), **kwargs)
         if font is None:
             self.letter_data = None
-            self.letter_layer = None
         self.scale_x_continuous = scale_x_continuous(breaks=lambda x: range(floor(x[0]), ceil(x[1])), expand=(0,0))
         self.scale_y_continuous = scale_y_continuous(breaks=[0,1])
         self.ylab = ylab('Seq Bar')
@@ -153,5 +150,14 @@ class geom_seqBar:
         return {'seq_type': seq_type, 'max_frequency_mat': max_frequency_mat}
 
     def __radd__(self, gg):
-        gg = gg + [self.bar_layer, self.letter_layer, self.scale_x_continuous, self.scale_y_continuous, self.ylab, self.xlab, self.colscale_opts]
+        params = []
+        if self.letter_data is not None:
+            letter_layer = geom_polygon(data=self.letter_data, mapping=aes(x='x', y='y', group='group_by'),
+                                        fill=self.__font_col, **self.__kwargs)
+            params.append(letter_layer)
+        params.extend([geom_tile(data=self.bar_data,
+                                 mapping=aes(x='x', y='y', width='width', height='height', fill='group'),
+                                 **self.__kwargs), self.scale_x_continuous, self.scale_y_continuous, self.ylab,
+                       self.xlab, self.colscale_opts])
+        gg = gg + params
         return gg
