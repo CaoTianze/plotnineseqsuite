@@ -7,4 +7,6 @@ See [plotnineSeqSuite Documentation](https://caotianze.github.io/plotnineseqsuit
 PyCharm 2022.1 (Community Edition) and Spyder version: 5.4.1  (conda)
 ## Dependencies
 Python version: 3.10.9 64-bit    
-plotnine: 0.10.1
+plotnine: 0.12.2
+## Similar projects
+R package [ggmsa](https://github.com/YuLab-SMU/ggmsa) and [ggseqlogo](https://github.com/omarwagih/ggseqlogo)

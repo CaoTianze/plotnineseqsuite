@@ -133,10 +133,11 @@ class geom_alignedSeq:
                                  mapping=aes(x='x', y='y', width='width', height='height', fill='group'),
                                  **self.__kwargs)
             params.append(bg_layer)
+            params.append(self.colscale_opts)
         if self.letter_data is not None:
             letter_layer = geom_polygon(data=self.letter_data, mapping=aes(x='x', y='y', group='group_by'),
                                         fill=self.__font_col, **self.__kwargs)
             params.append(letter_layer)
-        params.extend([self.scale_x_continuous, self.scale_y_continuous, self.ylab, self.xlab, self.colscale_opts])
+        params.extend([self.scale_x_continuous, self.scale_y_continuous, self.ylab, self.xlab])
         gg = gg + params
         return gg
