@@ -143,7 +143,6 @@ g = g + theme(aspect_ratio=0.1, panel_grid=element_blank(),
               axis_title_x=element_blank(), axis_text_x=element_blank(),
               axis_ticks_major_x=element_blank(), axis_ticks_major_y=element_blank(),
               axis_title_y=element_text(size=8)) + guides(fill=False)
-print(g)
 g.save('Fig. 4A.png',dpi=300,width=6,height=1)
 
 layer_logo = geom_logo(data=data, method='probability')
