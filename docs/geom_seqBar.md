@@ -31,13 +31,9 @@ Used when the letters in the corresponding namespace do not have a color matchin
 Other arguments passed on to layer().
 ## *properties*
 - bar_data    
-DataFrame. 
-- bar_layer    
-A geom_tile layer. Data come from the property bar_data.
+DataFrame.
 - letter_data    
-DataFrame. 
-- letter_layer    
-A geom_polygon layer. Data come from the property letter_data.
+DataFrame.
 - scale_x_continuous    
 A custom scale_x_continuous.
 - scale_y_continuous    

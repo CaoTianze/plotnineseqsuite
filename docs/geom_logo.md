@@ -34,8 +34,6 @@ Other arguments passed on to layer().
 ## *properties*
 - data    
 DataFrame.
-- layer    
-A geom_polygon layer. Data come from the property data.
 - scale_x_continuous    
 A custom scale_x_continuous.
 - xlab    

@@ -34,12 +34,8 @@ Other arguments passed on to layer().
 ## *properties*
 - bg_data    
 DataFrame.
-- bg_layer    
-A geom_tile layer. Data come from the property bg_data.
 - letter_data    
 DataFrame.
-- letter_layer    
-A geom_polygon layer. Data come from the property letter_data.
 - scale_x_continuous    
 A custom scale_x_continuous.
 - scale_y_continuous    
