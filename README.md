@@ -10,3 +10,5 @@ Python version: 3.10.9 64-bit
 plotnine: 0.12.2
 ## Similar projects
 R package [ggmsa](https://github.com/YuLab-SMU/ggmsa) and [ggseqlogo](https://github.com/omarwagih/ggseqlogo)
+## Derivative projects
+- [Pyggseqlogo](https://github.com/CaoTianze/pyggseqlogo): Python version of ggseqlogo. 
