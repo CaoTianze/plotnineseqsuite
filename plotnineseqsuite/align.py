@@ -17,12 +17,14 @@ class geom_alignedSeq:
     def __init__(self, data: Union[List[str], Dict] = None, seq_names: List[str] = None, seq_type: str = 'AUTO',
                  namespace: List[str] = None,
                  font: str = 'roboto_medium', stack_width: float = 0.75, border_col: str = 'grey',
-                 font_col: str = '#000000', bg_col_scheme: Union[DataFrame, str] = 'AUTO',
-                 bg_low_col: str = 'black', bg_high_col: str = 'yellow', bg_na_col: str = '#333333',
+                 scheme_applied: str = 'BACKGROUND', no_scheme_col: str = '#000000',
+                 col_scheme: Union[DataFrame, str] = 'AUTO',
+                 low_col: str = 'black', high_col: str = 'yellow', na_col: str = '#333333',
                  **kwargs):
         self.__kwargs = kwargs
-        self.__font_col = font_col
+        self.__no_scheme_col = no_scheme_col
         self.__border_col = border_col
+        self.__scheme_applied = scheme_applied
         if stack_width > 1 or stack_width <= 0:
             raise Exception('"stack_width" must be between 0 and 1')
         if data is None:
@@ -31,6 +33,8 @@ class geom_alignedSeq:
             seq_type = 'OTHER'
         if seq_type not in {'OTHER', 'AUTO', 'AA', 'DNA', 'RNA'}:
             raise Exception("seq_type must be one of 'OTHER' or 'AUTO', or 'AA', or 'DNA', or 'RNA'")
+        if scheme_applied not in {'BACKGROUND', 'LETTER'}:
+            raise Exception("scheme_applied must be one of 'BACKGROUND' or 'LETTER'")
         if type(data) == list:
             data = {1: data}
         lvls = data.keys()
@@ -43,40 +47,48 @@ class geom_alignedSeq:
         if font is not None:
             letter_data = reduce(lambda x, y: concat([x, y]), map(lambda x: x['letter_data'], data_sp))
 
-        if type(bg_col_scheme) is str:
-            bg_cs_dict = get_col_scheme(bg_col_scheme, seq_type)
-        elif type(bg_col_scheme) is dict and type(bg_col_scheme['cs']) == DataFrame:
-            bg_cs_dict = bg_col_scheme
+        if type(col_scheme) is str:
+            cs_dict = get_col_scheme(col_scheme, seq_type)
+        elif type(col_scheme) is dict and type(col_scheme['cs']) == DataFrame:
+            cs_dict = col_scheme
 
-        if bg_col_scheme is not None:
-            legend_title = bg_cs_dict['name']
-            colscale_gradient = True if is_numeric_dtype(bg_cs_dict['cs']['group']) else False
+        if col_scheme is not None:
+            legend_title = cs_dict['name']
+            colscale_gradient = True if is_numeric_dtype(cs_dict['cs']['group']) else False
             if colscale_gradient:
-                bg_cs_dict['cs'] = concat([bg_cs_dict['cs'],DataFrame(data={'letter':['-'],'group':[0]})])
-                colscale_opts = scale_fill_gradient(low=bg_low_col, high=bg_high_col, name=legend_title,
-                                                    na_value=bg_na_col)
+                # TODO check contain -, then add -
+                cs_dict['cs'] = concat([cs_dict['cs'], DataFrame(data={'letter': ['-'], 'group': [0]})])
+                colscale_opts = scale_fill_gradient(low=low_col, high=high_col, name=legend_title,
+                                                    na_value=na_col)
             else:
-                bg_cs_dict['cs'] = concat([bg_cs_dict['cs'], DataFrame(data={'letter': ['-'], 'group': ['-'], 'col': ['#FFFFFF']})])
-                tmp = bg_cs_dict['cs'].drop_duplicates(subset=['group']).dropna(subset=['group'])
+                cs_dict['cs'] = concat(
+                    [cs_dict['cs'], DataFrame(data={'letter': ['-'], 'group': ['-'], 'col': ['#FFFFFF']})])
+                tmp = cs_dict['cs'].drop_duplicates(subset=['group']).dropna(subset=['group'])
                 col_map = {}
                 for item in map(lambda x, y: {x: y}, tmp['group'], tmp['col']):
                     col_map.update(item)
-                colscale_opts = scale_fill_manual(values=col_map, name=legend_title, na_value=bg_na_col)
-            bg_data = merge(bg_data, bg_cs_dict['cs'], how='left')
-            self.bg_data = bg_data
+                colscale_opts = scale_fill_manual(values=col_map, name=legend_title, na_value=na_col)
+            if scheme_applied == 'BACKGROUND':
+                bg_data = merge(bg_data, cs_dict['cs'], how='left')
+            else:
+                letter_data = merge(letter_data, cs_dict['cs'], how='left')
             self.colscale_opts = colscale_opts
         else:
-            self.bg_data = None
+            if scheme_applied == 'BACKGROUND':
+                bg_data = None
+            else:
+                letter_data = None
             self.colscale_opts = None
 
         if font is not None:
             letter_data = letter_data.sort_values(by='order').reset_index(drop=True)
             letter_data['group_by'] = letter_data.apply(
                 lambda x: '{}.{}.{}.{}'.format(x['seq_group'], x['letter'], x['position'], x['y_index']), axis=1)
-            self.letter_data = letter_data
         else:
-            self.letter_data = None
-        self.scale_x_continuous = scale_x_continuous(breaks=lambda x: range(floor(x[0]), ceil(x[1])), expand=(0,0))
+            letter_data = None
+        self.bg_data = bg_data
+        self.letter_data = letter_data
+        self.scale_x_continuous = scale_x_continuous(breaks=lambda x: range(floor(x[0]), ceil(x[1])), expand=(0, 0))
         self.scale_y_continuous = scale_y_continuous(breaks=None)
         if seq_names is not None:
             self.scale_y_continuous = scale_y_continuous(breaks=lambda x: [k + 0.5 for k in range(0, int(x[1]))],
@@ -130,15 +142,27 @@ class geom_alignedSeq:
     def __radd__(self, gg):
         params = []
         if self.bg_data is not None:
-            bg_layer = geom_tile(data=self.bg_data,
-                                 mapping=aes(x='x', y='y', width='width', height='height', fill='group'),
-                                 color=self.__border_col,
-                                 **self.__kwargs)
+            if self.__scheme_applied == 'BACKGROUND':
+                bg_layer = geom_tile(data=self.bg_data,
+                                     mapping=aes(x='x', y='y', width='width', height='height', fill='group'),
+                                     color=self.__border_col,
+                                     **self.__kwargs)
+            else:
+                bg_layer = geom_tile(data=self.bg_data,
+                                     mapping=aes(x='x', y='y', width='width', height='height'),
+                                     fill=self.__no_scheme_col,
+                                     color=self.__border_col,
+                                     **self.__kwargs)
             params.append(bg_layer)
             params.append(self.colscale_opts)
         if self.letter_data is not None:
-            letter_layer = geom_polygon(data=self.letter_data, mapping=aes(x='x', y='y', group='group_by'),
-                                        fill=self.__font_col, **self.__kwargs)
+            if self.__scheme_applied == 'BACKGROUND':
+                letter_layer = geom_polygon(data=self.letter_data, mapping=aes(x='x', y='y', group='group_by'),
+                                            fill=self.__no_scheme_col, **self.__kwargs)
+            else:
+                letter_layer = geom_polygon(data=self.letter_data,
+                                            mapping=aes(x='x', y='y', group='group_by', fill='group'),
+                                            **self.__kwargs)
             params.append(letter_layer)
         params.extend([self.scale_x_continuous, self.scale_y_continuous, self.ylab, self.xlab])
         gg = gg + params

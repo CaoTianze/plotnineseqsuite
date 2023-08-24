@@ -26,17 +26,25 @@ geom_alignedSeq accepts two types of input, each described in detail below
 1. list: a list of aligned sequences
 2. dict: It is used for plotting more than one sequence logo at the same time with the help of facets, the key of dict is facet value, and the value of dict is list described above
 ### No background color
-When bg_col_scheme option is None, the picture has no background color. 
+When col_scheme option is None, the picture has no background color. 
 ```python
-ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font_col='black', bg_col_scheme=None) + theme_seq() + coord_fixed()
+ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], no_scheme_col='black', col_scheme=None) + theme_seq() + coord_fixed()
 ```
 ![](no_background_color.png)
 ### No sequence letter
-When font option is None, the picture has only the background color. 
+When font option is None and border_col is None, the picture has only the background color. 
 ```python
-ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font=None) + theme_seq() + coord_fixed()
+ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font=None, border_col=None) + theme_seq() + coord_fixed()
 ```
 ![](no_sequence_letter.png)
+
+### The color scheme switches to letters
+When the option scheme_applied is LETTER, the color scheme will be applied from the background to the letters.
+```Python
+ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], no_scheme_col='white', scheme_applied='LETTER') + theme_seq() + coord_fixed()
+```
+![](switch_color_schme.png)
+
 ### Tagging sequences
 You can set seq_names parameter to identify the name of the sequence.
 ```python
@@ -133,7 +141,7 @@ ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['δ','ε','�
 ![](custom_alphabet_2.png)
 ## Colour schemes
 ### Preset color schemes
-plotnineSeqSuite has preset color schemes that can be set using the col_scheme parameter in geom_logo, the parameter bar_col_scheme in geom_seqBar and the parameter bg_col_scheme in geom_alignedSeq. By default, the col_scheme is set to AUTO such that the color scheme is automatically chosen based on your sequence type.
+plotnineSeqSuite has preset color schemes that can be set using the col_scheme parameter in geom_logo, the parameter bar_col_scheme in geom_seqBar and the parameter col_scheme in geom_alignedSeq. By default, the col_scheme is set to AUTO such that the color scheme is automatically chosen based on your sequence type.
 
 Lets try generate an amino acid sequence logo using kinase-substrate phosphorylation data:
 ```python

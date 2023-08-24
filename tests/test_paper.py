@@ -70,7 +70,7 @@ O = ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font=None) + ggtitle('O') +
 O.save('Fig. 2O.png')
 P = ggplot() + geom_seqBar(seqs_dna['MA0013.1'], font=None) + ggtitle('P') + theme_seq()# Fig. 2P
 P.save('Fig. 2P.png')
-Q = ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font_col='black', bg_col_scheme=None) + ggtitle(
+Q = ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], no_scheme_col='black', col_scheme=None) + ggtitle(
     'Q') + theme_seq() + coord_fixed()  # Fig. 2G
 Q.save('Fig. 2Q.png')
 from plotnine import scale_y_continuous

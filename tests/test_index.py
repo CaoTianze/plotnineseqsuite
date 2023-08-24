@@ -17,11 +17,15 @@ def test_plot_an_aligned_sequences():
 
 
 def test_no_background_color():
-    ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font_col='black', bg_col_scheme=None) + theme_seq() + coord_fixed()
+    ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], no_scheme_col='black', col_scheme=None) + theme_seq() + coord_fixed()
 
 
 def test_no_sequence_letter():
-    ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font=None) + theme_seq() + coord_fixed()
+    ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font=None, border_col=None) + theme_seq() + coord_fixed()
+
+
+def test_switch_color_schme():
+    ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], no_scheme_col='white', scheme_applied='LETTER') + theme_seq() + coord_fixed()
 
 
 def test_tagging_sequences():

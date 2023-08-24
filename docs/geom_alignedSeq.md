@@ -1,11 +1,29 @@
 # geom_alignedSeq
 A class that represents the sequence alignment diagram
-## *class* geom_alignedSeq(self,data: Union[list[str], dict, None] = None,seq_names: Optional[list[str]] = None,seq_type: str = 'AUTO',namespace: Optional[list[str]] = None,font: str = 'roboto_medium',stack_width: float = 0.75,font_col: str = '#FFFFFF',bg_col_scheme: Union[DataFrame, str] = 'AUTO',bg_low_col: str = 'black',bg_high_col: str = 'yellow',bg_na_col: str = '#333333',**kwargs: Any)
+## *Sample code*
 ```python
 from plotnine import ggplot, coord_fixed
 from plotnineseqsuite import geom_alignedSeq, theme_seq
 from plotnineseqsuite.data import seqs_dna
 ggplot() + geom_alignedSeq(seqs_dna['MA0013.1']) + theme_seq() + coord_fixed()
+```
+## *Init param*
+```
+geom_alignedSeq(self,
+             data: list[str] | dict | None = None,
+             seq_names: list[str] | None = None,
+             seq_type: str = 'AUTO',
+             namespace: list[str] | None = None,
+             font: str = 'roboto_medium',
+             stack_width: float = 0.75,
+             border_col: str = 'grey',
+             scheme_applied: str = 'BACKGROUND',
+             no_scheme_col: str = '#000000',
+             col_scheme: DataFrame | str = 'AUTO',
+             low_col: str = 'black',
+             high_col: str = 'yellow',
+             na_col: str = '#333333',
+             **kwargs: Any) -> Any
 ```
 - data    
 Sequence data or corresponding dict.
@@ -19,16 +37,20 @@ The letter corresponding to the data.
 Font value
 - stack_width    
 The ratio of the size of letters to the standard unit width.
-- font_col    
-The color of the font.
-- bg_col_scheme    
-Color scheme of the backgrounds.
-- bg_low_col    
+- border_col
+The color of the border in the background. When it is None, the border of the background will disappear.
+- scheme_applied
+BACKGROUND or LETTER. Indicates the target to which the color scheme applies.
+- no_scheme_col    
+When a color scheme is applied to the background, this indicates the color of the letters. When a color scheme is applied to letters, this indicates the color of the background.
+- col_scheme    
+Color scheme.
+- low_col    
 Continuous color schemes are available.
-- bg_high_col    
+- high_col    
 Continuous color schemes are available.
-- bg_na_col    
-Used when the background in the corresponding namespace do not have a color matching value defined.
+- na_col    
+It is available when the corresponding namespace do not have a color matching value defined.
 - kwargs    
 Other arguments passed on to layer().
 ## *properties*
