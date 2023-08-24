@@ -16,12 +16,13 @@ class geom_alignedSeq:
 
     def __init__(self, data: Union[List[str], Dict] = None, seq_names: List[str] = None, seq_type: str = 'AUTO',
                  namespace: List[str] = None,
-                 font: str = 'roboto_medium', stack_width: float = 0.75,
+                 font: str = 'roboto_medium', stack_width: float = 0.75, border_col: str = 'grey',
                  font_col: str = '#000000', bg_col_scheme: Union[DataFrame, str] = 'AUTO',
                  bg_low_col: str = 'black', bg_high_col: str = 'yellow', bg_na_col: str = '#333333',
                  **kwargs):
         self.__kwargs = kwargs
         self.__font_col = font_col
+        self.__border_col = border_col
         if stack_width > 1 or stack_width <= 0:
             raise Exception('"stack_width" must be between 0 and 1')
         if data is None:
@@ -131,6 +132,7 @@ class geom_alignedSeq:
         if self.bg_data is not None:
             bg_layer = geom_tile(data=self.bg_data,
                                  mapping=aes(x='x', y='y', width='width', height='height', fill='group'),
+                                 color=self.__border_col,
                                  **self.__kwargs)
             params.append(bg_layer)
             params.append(self.colscale_opts)
