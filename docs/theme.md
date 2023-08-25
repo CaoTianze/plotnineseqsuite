@@ -1,3 +1,3 @@
 # theme
-## *function* theme_seq() -> theme
-Default theme. Plain white background.
+## theme_seq
+A class represents default theme. Plain white background.
