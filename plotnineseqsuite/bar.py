@@ -66,7 +66,7 @@ class geom_seqBar:
             self.letter_data = None
         self.scale_x_continuous = scale_x_continuous(breaks=lambda x: range(floor(x[0]), ceil(x[1])), expand=(0,0))
         self.scale_y_continuous = scale_y_continuous(breaks=[0,1])
-        self.ylab = ylab('Seq Bar')
+        self.ylab = ylab('Conservation')
         self.xlab = xlab('')
         self.colscale_opts = colscale_opts
 
