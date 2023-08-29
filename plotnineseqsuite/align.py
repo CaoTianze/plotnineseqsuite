@@ -93,7 +93,7 @@ class geom_alignedSeq:
         if seq_names is not None:
             self.scale_y_continuous = scale_y_continuous(breaks=lambda x: [k + 0.5 for k in range(0, int(x[1]))],
                                                          labels=seq_names)
-        self.ylab = ylab('Aligned Seq')
+        self.ylab = ylab('Consensus')
         self.xlab = xlab('')
 
     def __aligned_data(self, seqs, font, stack_width=0.95, seq_group=1,
