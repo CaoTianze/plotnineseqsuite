@@ -54,7 +54,9 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">geom_alignedSeq</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#class-geom_alignedseqselfdata-unionliststr-dict-none-noneseq_names-optionalliststr-noneseq_type-str-autonamespace-optionalliststr-nonefont-str-roboto_mediumstack_width-float-075font_col-str-ffffffbg_col_scheme-uniondataframe-str-autobg_low_col-str-blackbg_high_col-str-yellowbg_na_col-str-333333kwargs-any">class geom_alignedSeq(self,data: Union[list[str], dict, None] = None,seq_names: Optional[list[str]] = None,seq_type: str = 'AUTO',namespace: Optional[list[str]] = None,font: str = 'roboto_medium',stack_width: float = 0.75,font_col: str = '#FFFFFF',bg_col_scheme: Union[DataFrame, str] = 'AUTO',bg_low_col: str = 'black',bg_high_col: str = 'yellow',bg_na_col: str = '#333333',**kwargs: Any)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#sample-code">Sample code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#init-param">Init param</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#properties">properties</a>
     </li>
@@ -98,11 +100,28 @@
               
                 <h1 id="geom_alignedseq">geom_alignedSeq</h1>
 <p>A class that represents the sequence alignment diagram</p>
-<h2 id="class-geom_alignedseqselfdata-unionliststr-dict-none-noneseq_names-optionalliststr-noneseq_type-str-autonamespace-optionalliststr-nonefont-str-roboto_mediumstack_width-float-075font_col-str-ffffffbg_col_scheme-uniondataframe-str-autobg_low_col-str-blackbg_high_col-str-yellowbg_na_col-str-333333kwargs-any"><em>class</em> geom_alignedSeq(self,data: Union[list[str], dict, None] = None,seq_names: Optional[list[str]] = None,seq_type: str = 'AUTO',namespace: Optional[list[str]] = None,font: str = 'roboto_medium',stack_width: float = 0.75,font_col: str = '#FFFFFF',bg_col_scheme: Union[DataFrame, str] = 'AUTO',bg_low_col: str = 'black',bg_high_col: str = 'yellow',bg_na_col: str = '#333333',**kwargs: Any)</h2>
+<h2 id="sample-code"><em>Sample code</em></h2>
 <pre><code class="language-python">from plotnine import ggplot, coord_fixed
 from plotnineseqsuite import geom_alignedSeq, theme_seq
 from plotnineseqsuite.data import seqs_dna
 ggplot() + geom_alignedSeq(seqs_dna['MA0013.1']) + theme_seq() + coord_fixed()
+</code></pre>
+<h2 id="init-param"><em>Init param</em></h2>
+<pre><code>geom_alignedSeq(self,
+             data: list[str] | dict | None = None,
+             seq_names: list[str] | None = None,
+             seq_type: str = 'AUTO',
+             namespace: list[str] | None = None,
+             font: str = 'roboto_medium',
+             stack_width: float = 0.75,
+             border_col: str = 'grey',
+             scheme_applied: str = 'BACKGROUND',
+             no_scheme_col: str = '#000000',
+             col_scheme: DataFrame | str = 'AUTO',
+             low_col: str = 'black',
+             high_col: str = 'yellow',
+             na_col: str = '#333333',
+             **kwargs: Any) -&gt; Any
 </code></pre>
 <ul>
 <li>data  <br />
@@ -117,16 +136,20 @@ The letter corresponding to the data. </li>
 Font value</li>
 <li>stack_width  <br />
 The ratio of the size of letters to the standard unit width.</li>
-<li>font_col  <br />
-The color of the font.</li>
-<li>bg_col_scheme  <br />
-Color scheme of the backgrounds.</li>
-<li>bg_low_col  <br />
+<li>border_col
+The color of the border in the background. When it is None, the border of the background will disappear.</li>
+<li>scheme_applied
+BACKGROUND or LETTER. Indicates the target to which the color scheme applies.</li>
+<li>no_scheme_col  <br />
+When a color scheme is applied to the background, this indicates the color of the letters. When a color scheme is applied to letters, this indicates the color of the background.</li>
+<li>col_scheme  <br />
+Color scheme.</li>
+<li>low_col  <br />
 Continuous color schemes are available.</li>
-<li>bg_high_col  <br />
+<li>high_col  <br />
 Continuous color schemes are available.</li>
-<li>bg_na_col  <br />
-Used when the background in the corresponding namespace do not have a color matching value defined.</li>
+<li>na_col  <br />
+It is available when the corresponding namespace do not have a color matching value defined.</li>
 <li>kwargs  <br />
 Other arguments passed on to layer().</li>
 </ul>

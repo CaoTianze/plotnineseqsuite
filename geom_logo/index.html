@@ -58,7 +58,9 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">geom_logo</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#class-geom_logoselfdata-unionliststr-ndarray-dict-none-nonemethod-str-bitsseq_type-str-autonamespace-optionalliststr-nonefont-str-roboto_mediumstack_width-float-095rev_stack_order-bool-falsecol_scheme-uniondataframe-str-autolow_col-str-blackhigh_col-str-yellowna_col-str-333333kwargs-any">class geom_logo(self,data: Union[list[str], ndarray, dict, None] = None,method: str = 'bits',seq_type: str = 'AUTO',namespace: Optional[list[str]] = None,font: str = 'roboto_medium',stack_width: float = 0.95,rev_stack_order: bool = False,col_scheme: Union[DataFrame, str] = 'AUTO',low_col: str = 'black',high_col: str = 'yellow',na_col: str = '#333333',**kwargs: Any)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#sample-code">Sample code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#init-param">Init param</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#properties">properties</a>
     </li>
@@ -98,11 +100,26 @@
               
                 <h1 id="geom_logo">geom_logo</h1>
 <p>A class that represents the sequence logo</p>
-<h2 id="class-geom_logoselfdata-unionliststr-ndarray-dict-none-nonemethod-str-bitsseq_type-str-autonamespace-optionalliststr-nonefont-str-roboto_mediumstack_width-float-095rev_stack_order-bool-falsecol_scheme-uniondataframe-str-autolow_col-str-blackhigh_col-str-yellowna_col-str-333333kwargs-any"><em>class</em> geom_logo(self,data: Union[list[str], ndarray, dict, None] = None,method: str = 'bits',seq_type: str = 'AUTO',namespace: Optional[list[str]] = None,font: str = 'roboto_medium',stack_width: float = 0.95,rev_stack_order: bool = False,col_scheme: Union[DataFrame, str] = 'AUTO',low_col: str = 'black',high_col: str = 'yellow',na_col: str = '#333333',**kwargs: Any)</h2>
+<h2 id="sample-code"><em>Sample code</em></h2>
 <pre><code class="language-python">from plotnine import ggplot
 from plotnineseqsuite import geom_logo, theme_seq
 from plotnineseqsuite.data import seqs_dna
 ggplot() + geom_logo(seqs_dna['MA0001.1']) + theme_seq()
+</code></pre>
+<h2 id="init-param"><em>Init param</em></h2>
+<pre><code>geom_logo(self,
+             data: list[str] | ndarray | dict | None = None,
+             method: str = 'bits',
+             seq_type: str = 'AUTO',
+             namespace: list[str] | None = None,
+             font: str = 'roboto_medium',
+             stack_width: float = 0.95,
+             rev_stack_order: bool = False,
+             col_scheme: DataFrame | str = 'AUTO',
+             low_col: str = 'black',
+             high_col: str = 'yellow',
+             na_col: str = '#333333',
+             **kwargs: Any) -&gt; Any
 </code></pre>
 <ul>
 <li>data  <br />

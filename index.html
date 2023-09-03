@@ -56,6 +56,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#no-sequence-letter">No sequence letter</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-color-scheme-switches-to-letters">The color scheme switches to letters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#tagging-sequences">Tagging sequences</a>
     </li>
         </ul>
@@ -196,15 +198,20 @@ ggplot() + geom_alignedSeq(seqs_dna['MA0013.1']) + theme_seq() + coord_fixed()
 <li>dict: It is used for plotting more than one sequence logo at the same time with the help of facets, the key of dict is facet value, and the value of dict is list described above</li>
 </ol>
 <h3 id="no-background-color">No background color</h3>
-<p>When bg_col_scheme option is None, the picture has no background color. </p>
-<pre><code class="language-python">ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font_col='black', bg_col_scheme=None) + theme_seq() + coord_fixed()
+<p>When col_scheme option is None, the picture has no background color. </p>
+<pre><code class="language-python">ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], no_scheme_col='black', col_scheme=None) + theme_seq() + coord_fixed()
 </code></pre>
 <p><img alt="" src="no_background_color.png" /></p>
 <h3 id="no-sequence-letter">No sequence letter</h3>
-<p>When font option is None, the picture has only the background color. </p>
-<pre><code class="language-python">ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font=None) + theme_seq() + coord_fixed()
+<p>When font option is None and border_col is None, the picture has only the background color. </p>
+<pre><code class="language-python">ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font=None, border_col=None) + theme_seq() + coord_fixed()
 </code></pre>
 <p><img alt="" src="no_sequence_letter.png" /></p>
+<h3 id="the-color-scheme-switches-to-letters">The color scheme switches to letters</h3>
+<p>When the option scheme_applied is LETTER, the color scheme will be applied from the background to the letters.</p>
+<pre><code class="language-Python">ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], no_scheme_col='white', scheme_applied='LETTER') + theme_seq() + coord_fixed()
+</code></pre>
+<p><img alt="" src="switch_color_schme.png" /></p>
 <h3 id="tagging-sequences">Tagging sequences</h3>
 <p>You can set seq_names parameter to identify the name of the sequence.</p>
 <pre><code class="language-python">names=['seq-a', 'seq-b', 'seq-c', 'seq-d', 'seq-e', 'seq-f']
@@ -289,7 +296,7 @@ ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['δ','ε','�
 <p><img alt="" src="custom_alphabet_2.png" /></p>
 <h2 id="colour-schemes">Colour schemes</h2>
 <h3 id="preset-color-schemes">Preset color schemes</h3>
-<p>plotnineSeqSuite has preset color schemes that can be set using the col_scheme parameter in geom_logo, the parameter bar_col_scheme in geom_seqBar and the parameter bg_col_scheme in geom_alignedSeq. By default, the col_scheme is set to AUTO such that the color scheme is automatically chosen based on your sequence type.</p>
+<p>plotnineSeqSuite has preset color schemes that can be set using the col_scheme parameter in geom_logo, the parameter bar_col_scheme in geom_seqBar and the parameter col_scheme in geom_alignedSeq. By default, the col_scheme is set to AUTO such that the color scheme is automatically chosen based on your sequence type.</p>
 <p>Lets try generate an amino acid sequence logo using kinase-substrate phosphorylation data:</p>
 <pre><code class="language-python">ggplot() + geom_logo(seqs_dna['MA0001.1'], col_scheme='base_pairing') + theme_seq()
 </code></pre>
@@ -412,5 +419,5 @@ ggplot() + geom_alignedSeq(seqs_dna['MA0013.1']) + annotate('rect', xmin=0.5, xm
 
 <!--
 MkDocs version : 1.5.2
-Build Date UTC : 2023-08-14 09:31:25.877816+00:00
+Build Date UTC : 2023-09-03 06:55:37.546583+00:00
 -->
