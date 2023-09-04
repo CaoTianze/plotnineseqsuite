@@ -115,18 +115,18 @@ list(map(lambda img_item, coordinate_size: dst.paste(img_item, (
 dst.save('Fig. 2.png')
 
 #Fig. 3
-name3 = ['A', 'B', 'C']
-img3 = []
-resize_img3 = []
-for item in name3:
-    img3.append(Image.open('compare/Fig. 3%s.png' % item))
-for item in img3:
-    resize_img3.append(item.resize((img3[0].width, img3[0].height)))
-coordinate3 = [(0, 0),(1,0),(2,0)]
-dst = Image.new('RGB', (img3[0].width * 3, img3[0].height * 1), color='white')
-list(map(lambda img_item, coordinate_size: dst.paste(img_item, (
-    img3[0].width * coordinate_size[0], img3[0].height * coordinate_size[1])), resize_img3, coordinate3))
-dst.save('Fig. 3.png')
+# name3 = ['A', 'B', 'C']
+# img3 = []
+# resize_img3 = []
+# for item in name3:
+#     img3.append(Image.open('compare/Fig. 3%s.png' % item))
+# for item in img3:
+#     resize_img3.append(item.resize((img3[0].width, img3[0].height)))
+# coordinate3 = [(0, 0),(1,0),(2,0)]
+# dst = Image.new('RGB', (img3[0].width * 3, img3[0].height * 1), color='white')
+# list(map(lambda img_item, coordinate_size: dst.paste(img_item, (
+#     img3[0].width * coordinate_size[0], img3[0].height * coordinate_size[1])), resize_img3, coordinate3))
+# dst.save('Fig. 3.png')
 
 #Fig. 4
 from plotnine import ggplot, theme, guides, element_text, element_rect, element_blank, scale_fill_manual
