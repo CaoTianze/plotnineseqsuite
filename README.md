@@ -3,6 +3,8 @@
 `pip install plotnineseqsuite`
 ## Getting Started
 See [plotnineSeqSuite Documentation](https://caotianze.github.io/plotnineseqsuite/) 
+## Gallery
+![https://caotianze.github.io/plotnineseqsuite/gallery.png](https://caotianze.github.io/plotnineseqsuite/gallery.png)
 ## Development environment 
 PyCharm 2022.1 (Community Edition) and Spyder version: 5.4.1  (conda)
 ## Dependencies
