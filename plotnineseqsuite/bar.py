@@ -16,7 +16,7 @@ from plotnineseqsuite.font import get_font
 class geom_seqBar:
     def __init__(self, data: Union[List[str], ndarray, Dict] = None, seq_type: str = 'AUTO',
                  namespace: List[str] = None,
-                 font: str = 'roboto_medium', stack_width: float = 0.75, bar_col_scheme: Union[DataFrame, str] = 'AUTO',
+                 font: str = 'roboto_medium', stack_width: float = 0.75, bar_col_scheme: Union[Dict, str] = 'AUTO',
                  font_col: str = '#808080',
                  low_col: str = 'black', high_col: str = 'yellow', na_col: str = '#333333',
                  **kwargs):

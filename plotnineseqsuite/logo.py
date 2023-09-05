@@ -18,7 +18,7 @@ class geom_logo:
     def __init__(self, data: Union[List[str], ndarray, Dict] = None, method: str = 'bits', seq_type: str = 'AUTO',
                  namespace: List[str] = None,
                  font: str = 'roboto_medium', stack_width: float = 0.95, rev_stack_order: bool = False,
-                 col_scheme: Union[DataFrame, str] = 'AUTO',
+                 col_scheme: Union[Dict, str] = 'AUTO',
                  low_col: str = 'black', high_col: str = 'yellow', na_col: str = '#333333',
                  **kwargs):
         self.__kwargs = kwargs
