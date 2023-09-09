@@ -45,19 +45,25 @@ from plotnineseqsuite.theme import theme_seq
 from plotnineseqsuite.align import geom_alignedSeq
 from plotnineseqsuite.bar import geom_seqBar
 
+cs3 = make_col_scheme(chars=['a', 't', 'c', 'g'], groups=['gr1', 'gr1', 'gr2', 'gr2'],
+                      cols=['purple', 'purple', 'blue', 'blue'])
+cs4 = make_col_scheme(chars=['1', '2', '4', '3'], groups=['gr1', 'gr1', 'gr2', 'gr2'],
+                      cols=['purple', 'purple', 'blue', 'blue'])
+cs5 = make_col_scheme(chars=['δ', 'ε', 'λ', 'ψ'], groups=['gr1', 'gr1', 'gr2', 'gr2'],
+                      cols=['purple', 'purple', 'blue', 'blue'])
 seqs_numeric = list(
     map(lambda x: x.replace('A', 'a').replace('T', 't').replace('G', 'g').replace('C', 'c'), seqs_dna['MA0001.1']))
-K = ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['a', 't', 'g', 'c']) + ggtitle(
+K = ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['a', 't', 'g', 'c'], col_scheme=cs3) + ggtitle(
     'K') + theme_seq() + guides(fill=False)  # Fig .4K
 K.save('Fig. 2K.png')
 seqs_numeric = list(
     map(lambda x: x.replace('A', '1').replace('T', '2').replace('G', '3').replace('C', '4'), seqs_dna['MA0001.1']))
-L = ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['1', '2', '3', '4']) + ggtitle(
+L = ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['1', '2', '3', '4'], col_scheme=cs4) + ggtitle(
     'L') + theme_seq() + guides(fill=False)  # Fig .4L
 L.save('Fig. 2L.png')
 seqs_numeric = list(
     map(lambda x: x.replace('A', 'δ').replace('T', 'ε').replace('G', 'ψ').replace('C', 'λ'), seqs_dna['MA0001.1']))
-M = ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['δ', 'ε', 'ψ', 'λ']) + ggtitle(
+M = ggplot() + geom_logo(seqs_numeric, method='probability', namespace=['δ', 'ε', 'ψ', 'λ'], col_scheme=cs5) + ggtitle(
     'M') + theme_seq() + guides(fill=False)  # Fig .4M
 M.save('Fig. 2M.png')
 
@@ -70,7 +76,7 @@ O = ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], font=None) + ggtitle('O') +
 O.save('Fig. 2O.png')
 P = ggplot() + geom_seqBar(seqs_dna['MA0013.1'], font=None) + ggtitle('P') + theme_seq()# Fig. 2P
 P.save('Fig. 2P.png')
-Q = ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], no_scheme_col='black', col_scheme=None) + ggtitle(
+Q = ggplot() + geom_alignedSeq(seqs_dna['MA0013.1'], scheme_applied='LETTER', no_scheme_col='#FFFFFF') + ggtitle(
     'Q') + theme_seq() + coord_fixed()  # Fig. 2G
 Q.save('Fig. 2Q.png')
 from plotnine import scale_y_continuous
@@ -129,49 +135,49 @@ dst.save('Fig. 2.png')
 # dst.save('Fig. 3.png')
 
 #Fig. 4
-from plotnine import ggplot, theme, guides, element_text, element_rect, element_blank, scale_fill_manual
-from plotnineseqsuite import geom_logo
-
-data = ['RELVKDRRWSPDSKKKIREGPSNGAHEERNWHPVDGANGVRRYVP', 'RELIKDRRWSPDSRNDIREGPSDGQHEERNWHPSNGANGVSRYIP',
-        'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP', 'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP',
-        'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP', 'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP',
-        'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP', 'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP',
-        'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP', 'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP']
-g = ggplot() + geom_logo(data=data, method='probability')+ggtitle('A')
-g = g + theme(aspect_ratio=0.1, panel_grid=element_blank(),
-              panel_background=element_rect(fill='white'),
-              axis_title_x=element_blank(), axis_text_x=element_blank(),
-              axis_ticks_major_x=element_blank(), axis_ticks_major_y=element_blank(),
-              axis_title_y=element_text(size=8)) + guides(fill=False)
-g.save('Fig. 4A.png',dpi=300,width=6,height=1)
-
-layer_logo = geom_logo(data=data, method='probability')
-
-
-def change_group(x):
-    if x['position'] == 1 or x['position'] == 6 or x['position'] == 19 or x['position'] == 29 or x['position'] == 42:
-        x['group'] = 'interested'
-    else:
-        x['group'] = 'not_interested'
-    return x
-
-
-layer_logo.data = layer_logo.data.apply(func=change_group, axis=1)
-g = ggplot() + layer_logo + ggtitle('B') + scale_fill_manual({'interested': '#B22222', 'not_interested': '#C0C0C0'})
-g = g + theme(aspect_ratio=0.1, panel_grid=element_blank(), panel_background=element_rect(fill='white'),
-              axis_title_x=element_blank(), axis_text_x=element_blank(), axis_ticks_major_x=element_blank(),
-              axis_ticks_major_y=element_blank(), axis_title_y=element_text(size=8)) + guides(fill=False)
-g.save('Fig. 4B.png', dpi=300,width=6,height=1)
-
-name4 = ['A', 'B']
-img4 = []
-resize_img4 = []
-for item in name4:
-    img4.append(Image.open('Fig. 4%s.png' % item))
-for item in img4:
-    resize_img4.append(item.resize((img4[0].width, img4[0].height)))
-coordinate4 = [(0, 0),(0,1)]
-dst = Image.new('RGB', (img4[0].width * 1, img4[0].height * 2), color='white')
-list(map(lambda img_item, coordinate_size: dst.paste(img_item, (
-    img4[0].width * coordinate_size[0], img4[0].height * coordinate_size[1])), resize_img4, coordinate4))
-dst.save('Fig. 4.png')
+# from plotnine import ggplot, theme, guides, element_text, element_rect, element_blank, scale_fill_manual
+# from plotnineseqsuite import geom_logo
+#
+# data = ['RELVKDRRWSPDSKKKIREGPSNGAHEERNWHPVDGANGVRRYVP', 'RELIKDRRWSPDSRNDIREGPSDGQHEERNWHPSNGANGVSRYIP',
+#         'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP', 'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP',
+#         'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP', 'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP',
+#         'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP', 'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP',
+#         'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP', 'RELIKDRRWSPDSRNNIREGPSDGQHEERNWHPSNGANGVSRYIP']
+# g = ggplot() + geom_logo(data=data, method='probability')+ggtitle('A')
+# g = g + theme(aspect_ratio=0.1, panel_grid=element_blank(),
+#               panel_background=element_rect(fill='white'),
+#               axis_title_x=element_blank(), axis_text_x=element_blank(),
+#               axis_ticks_major_x=element_blank(), axis_ticks_major_y=element_blank(),
+#               axis_title_y=element_text(size=8)) + guides(fill=False)
+# g.save('Fig. 4A.png',dpi=300,width=6,height=1)
+#
+# layer_logo = geom_logo(data=data, method='probability')
+#
+#
+# def change_group(x):
+#     if x['position'] == 1 or x['position'] == 6 or x['position'] == 19 or x['position'] == 29 or x['position'] == 42:
+#         x['group'] = 'interested'
+#     else:
+#         x['group'] = 'not_interested'
+#     return x
+#
+#
+# layer_logo.data = layer_logo.data.apply(func=change_group, axis=1)
+# g = ggplot() + layer_logo + ggtitle('B') + scale_fill_manual({'interested': '#B22222', 'not_interested': '#C0C0C0'})
+# g = g + theme(aspect_ratio=0.1, panel_grid=element_blank(), panel_background=element_rect(fill='white'),
+#               axis_title_x=element_blank(), axis_text_x=element_blank(), axis_ticks_major_x=element_blank(),
+#               axis_ticks_major_y=element_blank(), axis_title_y=element_text(size=8)) + guides(fill=False)
+# g.save('Fig. 4B.png', dpi=300,width=6,height=1)
+#
+# name4 = ['A', 'B']
+# img4 = []
+# resize_img4 = []
+# for item in name4:
+#     img4.append(Image.open('Fig. 4%s.png' % item))
+# for item in img4:
+#     resize_img4.append(item.resize((img4[0].width, img4[0].height)))
+# coordinate4 = [(0, 0),(0,1)]
+# dst = Image.new('RGB', (img4[0].width * 1, img4[0].height * 2), color='white')
+# list(map(lambda img_item, coordinate_size: dst.paste(img_item, (
+#     img4[0].width * coordinate_size[0], img4[0].height * coordinate_size[1])), resize_img4, coordinate4))
+# dst.save('Fig. 4.png')
