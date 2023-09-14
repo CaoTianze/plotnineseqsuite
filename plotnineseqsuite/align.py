@@ -56,13 +56,14 @@ class geom_alignedSeq:
             legend_title = cs_dict['name']
             colscale_gradient = True if is_numeric_dtype(cs_dict['cs']['group']) else False
             if colscale_gradient:
-                # TODO check contain -, then add -
-                cs_dict['cs'] = concat([cs_dict['cs'], DataFrame(data={'letter': ['-'], 'group': [0]})])
+                if not any(cs_dict['cs']['letter'].isin(['-'])):
+                    cs_dict['cs'] = concat([cs_dict['cs'], DataFrame(data={'letter': ['-'], 'group': [0]})])
                 colscale_opts = scale_fill_gradient(low=low_col, high=high_col, name=legend_title,
                                                     na_value=na_col)
             else:
-                cs_dict['cs'] = concat(
-                    [cs_dict['cs'], DataFrame(data={'letter': ['-'], 'group': ['-'], 'col': ['#FFFFFF']})])
+                if not any(cs_dict['cs']['letter'].isin(['-'])):
+                    cs_dict['cs'] = concat(
+                        [cs_dict['cs'], DataFrame(data={'letter': ['-'], 'group': ['-'], 'col': ['#FFFFFF']})])
                 tmp = cs_dict['cs'].drop_duplicates(subset=['group']).dropna(subset=['group'])
                 col_map = {}
                 for item in map(lambda x, y: {x: y}, tmp['group'], tmp['col']):
