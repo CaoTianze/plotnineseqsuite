@@ -1,4 +1,4 @@
-# plotnineSeqSuite: a Python package for visualizing sequence data using ggplot2
+# plotnineSeqSuite: a Python package for visualizing sequence data using ggplot2 style
 ## Installation
 `pip install plotnineseqsuite`
 ## Getting Started
