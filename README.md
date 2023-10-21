@@ -1,4 +1,4 @@
-# plotnineSeqSuite: a Python package for visualizing sequence data using ggplot2
+# plotnineSeqSuite: a Python package for visualizing sequence data using ggplot2 style
 ## Cite this work
 Cao, T., Li, Q., Huang, Y. et al. plotnineSeqSuite: a Python package for visualizing sequence data using ggplot2 style. BMC Genomics 24, 585 (2023). https://doi.org/10.1186/s12864-023-09677-8
 ## Installation

@@ -8,7 +8,7 @@ setuptools.setup(
     version="1.0.0",
     author="Cao Tianze",
     author_email="hnrcao@qq.com",
-    description="A Python package for visualizing sequence data using ggplot2",
+    description="A Python package for visualizing sequence data using ggplot2 style",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/caotianze/plotnineseqsuite",
