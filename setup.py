@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="plotnineseqsuite",
-    version="0.9.2",
+    version="1.0.0",
     author="Cao Tianze",
     author_email="hnrcao@qq.com",
     description="A Python package for visualizing sequence data using ggplot2",
@@ -18,13 +18,13 @@ setuptools.setup(
     classifiers=[
         "Development Status :: 4 - Beta",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
     packages=['plotnineseqsuite','plotnineseqsuite.font','plotnineseqsuite.data'],
-    python_requires=">=3.10",
-    install_requires=['plotnine==0.12.2'],
+    python_requires=">=3.11",
+    install_requires=['plotnine==0.12.3'],
     license="MIT",
     keywords=['ggplot2', 'plotnine', 'Bioinformatics tool', 'Sequence logo', 'Sequence alignment'],
     package_data={
