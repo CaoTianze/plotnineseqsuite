@@ -160,7 +160,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Getting Started</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -323,20 +323,12 @@ ggplot() + geom_logo(seqs_dna)+ theme_seq()+facet_wrap('~seq_group', ncol=4, sca
 <h2 id="fonts">Fonts</h2>
 <p>You can adjust the font of letters by setting the font parameter. To list all the available color schemes use the font.list_fonts function. Take geom_logo for example.</p>
 <pre><code class="language-python">from plotnine import ggtitle
-import patchworklib as pw
 from plotnineseqsuite.font import list_fonts
-
 fonts = list_fonts()
-for i in range(0,12,3):
-    g1 = pw.load_ggplot(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i]) + theme_seq()+ggtitle(fonts[i]))
-    g2 = pw.load_ggplot(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i+1]) + theme_seq() + ggtitle(fonts[i+1]))
-    g3 = pw.load_ggplot(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i+2]) + theme_seq() + ggtitle(fonts[i+2]))
-    if i == 0:
-        allgg = g1|g2|g3
-    else:
-        temp = g1|g2|g3
-        allgg = temp/allgg
-allgg.savefig()
+for i in range(0, 15, 3):
+    print(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i]) + theme_seq() + ggtitle(fonts[i]))
+    print(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i + 1]) + theme_seq() + ggtitle(fonts[i + 1]))
+    print(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i + 2]) + theme_seq() + ggtitle(fonts[i + 2]))
 </code></pre>
 <p><img alt="" src="fonts.png" /></p>
 <h2 id="advanced-plotnineseqsuite">Advanced plotnineSeqSuite</h2>
@@ -418,6 +410,6 @@ ggplot() + geom_alignedSeq(seqs_dna['MA0013.1']) + annotate('rect', xmin=0.5, xm
 </html>
 
 <!--
-MkDocs version : 1.5.2
-Build Date UTC : 2023-09-04 00:57:24.894972+00:00
+MkDocs version : 1.5.3
+Build Date UTC : 2024-03-08 03:58:23.013050+00:00
 -->
