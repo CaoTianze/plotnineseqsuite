@@ -174,20 +174,12 @@ ggplot() + geom_logo(seqs_dna)+ theme_seq()+facet_wrap('~seq_group', ncol=4, sca
 You can adjust the font of letters by setting the font parameter. To list all the available color schemes use the font.list_fonts function. Take geom_logo for example.
 ```python
 from plotnine import ggtitle
-import patchworklib as pw
 from plotnineseqsuite.font import list_fonts
-
 fonts = list_fonts()
-for i in range(0,12,3):
-    g1 = pw.load_ggplot(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i]) + theme_seq()+ggtitle(fonts[i]))
-    g2 = pw.load_ggplot(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i+1]) + theme_seq() + ggtitle(fonts[i+1]))
-    g3 = pw.load_ggplot(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i+2]) + theme_seq() + ggtitle(fonts[i+2]))
-    if i == 0:
-        allgg = g1|g2|g3
-    else:
-        temp = g1|g2|g3
-        allgg = temp/allgg
-allgg.savefig()
+for i in range(0, 15, 3):
+    print(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i]) + theme_seq() + ggtitle(fonts[i]))
+    print(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i + 1]) + theme_seq() + ggtitle(fonts[i + 1]))
+    print(ggplot() + geom_logo(data=seqs_dna['MA0001.1'], font=fonts[i + 2]) + theme_seq() + ggtitle(fonts[i + 2]))
 ```
 ![](fonts.png)
 ## Advanced plotnineSeqSuite

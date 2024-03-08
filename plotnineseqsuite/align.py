@@ -166,5 +166,6 @@ class geom_alignedSeq:
                                             **self.__kwargs)
             params.append(letter_layer)
         params.extend([self.scale_x_continuous, self.scale_y_continuous, self.ylab, self.xlab])
-        gg = gg + params
+        for param in params:
+            gg += param
         return gg

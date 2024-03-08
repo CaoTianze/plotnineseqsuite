@@ -159,5 +159,6 @@ class geom_seqBar:
                                  mapping=aes(x='x', y='y', width='width', height='height', fill='group'),
                                  **self.__kwargs), self.scale_x_continuous, self.scale_y_continuous, self.ylab,
                        self.xlab, self.colscale_opts])
-        gg = gg + params
+        for param in params:
+            gg += param
         return gg

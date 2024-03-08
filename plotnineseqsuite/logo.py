@@ -102,9 +102,11 @@ class geom_logo:
                 'logo_data': ff}
 
     def __radd__(self, gg):
-        gg = gg + [
+        params = [
             geom_polygon(data=self.data, mapping=aes(x='x', y='y', fill='group', group='group_by'), **self.__kwargs),
             self.scale_x_continuous, self.ylab, self.xlab, self.colscale_opts]
+        for param in params:
+            gg+=param
         return gg
 
 

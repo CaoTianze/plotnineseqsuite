@@ -4,7 +4,7 @@ from pandas import read_csv, DataFrame
 
 __all__ = ['times_new_roman', 'arial' , 'courier_new', 'akrobat_bold', "xkcd_regular", "akrobat_regular", "helvetica_bold", "helvetica_light", "helvetica_regular",
            "roboto_bold", "roboto_medium", "roboto_regular", "roboto_slab_bold", "roboto_slab_light",
-           "roboto_slab_regular", "get_font", "list_fonts"]
+           "roboto_slab_regular"]
 data_dir = Path(__file__).parent
 times_new_roman = read_csv(data_dir / 'times_new_roman.csv', index_col="index")
 arial = read_csv(data_dir / 'arial.csv', index_col="index")

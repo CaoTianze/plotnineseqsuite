@@ -1,7 +1,6 @@
 from plotnine import ggplot, facet_wrap
 from numpy import random, array
 
-import patchworklib as pw
 from plotnineseqsuite.logo import geom_logo
 from plotnineseqsuite.theme import theme_seq
 from numpy import allclose
