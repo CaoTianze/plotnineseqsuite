@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="plotnineseqsuite",
-    version="1.1.2",
+    version="1.1.3",
     author="Cao Tianze",
     author_email="hnrcao@qq.com",
     description="A Python package for visualizing sequence data using ggplot2 style",
