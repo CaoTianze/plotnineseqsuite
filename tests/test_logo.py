@@ -1,10 +1,15 @@
 from plotnine import ggplot, facet_wrap
-from numpy import random, array
+from numpy import random, array, allclose, isin, apply_along_axis
 
 from plotnineseqsuite.logo import geom_logo
 from plotnineseqsuite.theme import theme_seq
-from numpy import allclose
+from plotnineseqsuite.common import DNA_NAMESPACE
 
+def test_logo_gaped():
+    test_seqs = ["ATCG", "NNNN", "ATCN", "CGTA"]
+    pfm=geom_logo(test_seqs)._geom_logo__make_PFM(test_seqs, seq_type="DNA")
+    assert pfm['bits'][3]==0
+    
 
 def test_logo_data():
     seqs = ['TTGTGAAAGAC', 'AAGTAAACTAA', 'TAATAAACAAA', 'TAATAAACAAA', 'CTGTAAATATT', 'TAGAAAGGTAT']

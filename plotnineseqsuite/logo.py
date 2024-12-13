@@ -2,7 +2,7 @@ from functools import reduce
 from math import floor, log, ceil
 from typing import Union, List, Dict
 
-from numpy import ndarray, array, zeros, sum, apply_along_axis, log2
+from numpy import ndarray, array, zeros, sum, apply_along_axis, log2, isin
 from pandas import merge, DataFrame, concat
 from pandas.core.dtypes.common import is_numeric_dtype
 from plotnine import aes, geom_polygon, scale_x_continuous
@@ -213,10 +213,11 @@ class geom_logo:
                 seq_type = namespace_dict['seq_type']
             pfm_mat = apply_along_axis(lambda x : x/sum(x), 0, seqs)
         else:
-            nseqs = len(seqs)
+
             letter_mat = letter_matrix(seqs)
             ns = find_namespace(letter_mat, seq_type, namespace=namespace)
             namespace = ns['namespace']
+            nseqs = apply_along_axis(sum, 0, isin(letter_mat, namespace))
             seq_type = ns['seq_type']
             pfm_mat = apply_along_axis(add_PFM_col, 0, letter_mat)
         N = len(namespace)
