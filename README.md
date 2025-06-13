@@ -7,11 +7,9 @@ Cao, T., Li, Q., Huang, Y. et al. plotnineSeqSuite: a Python package for visuali
 See [plotnineSeqSuite Documentation](https://caotianze.github.io/plotnineseqsuite/) 
 ## Gallery
 ![https://caotianze.github.io/plotnineseqsuite/gallery.png](https://caotianze.github.io/plotnineseqsuite/gallery.png)
-## Development environment 
-PyCharm 2023.2 (Community Edition) and Spyder version: 5.4.3  (conda)
 ## Dependencies
 Python version: 3.11.4 64-bit    
-plotnine: 0.13.6
+plotnine: 0.14.5
 ## Similar projects
 R package [ggmsa](https://github.com/YuLab-SMU/ggmsa) and [ggseqlogo](https://github.com/omarwagih/ggseqlogo)
 ## Derivative projects
