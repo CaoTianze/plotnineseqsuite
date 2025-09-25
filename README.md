@@ -8,8 +8,7 @@ See [plotnineSeqSuite Documentation](https://caotianze.github.io/plotnineseqsuit
 ## Gallery
 ![https://caotianze.github.io/plotnineseqsuite/gallery.png](https://caotianze.github.io/plotnineseqsuite/gallery.png)
 ## Dependencies
-Python version: 3.11.4 64-bit    
-plotnine: 0.14.5
+plotnine
 ## Similar projects
 R package [ggmsa](https://github.com/YuLab-SMU/ggmsa) and [ggseqlogo](https://github.com/omarwagih/ggseqlogo)
 ## Derivative projects
